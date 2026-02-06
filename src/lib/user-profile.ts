@@ -7,6 +7,7 @@ export type UserProfile = {
   examDaysLeft?: number;
   paceSessionsPerWeek?: number;
   focusSubject?: string;
+  autoStartSubject?: boolean;
 };
 
 const STORAGE_KEY = "adaptiveStudyCoachProfile";
@@ -21,6 +22,7 @@ const createGuestProfile = (): UserProfile => ({
   gradeLevel: DEFAULT_GRADE_LEVEL,
   learningMode: DEFAULT_LEARNING_MODE,
   skillLevel: DEFAULT_SKILL_LEVEL,
+  autoStartSubject: false,
 });
 
 const normalizeGradeLevel = (gradeLevel?: string) => {
@@ -60,6 +62,7 @@ export const loadUserProfile = (): UserProfile => {
       gradeLevel: normalizeGradeLevel(merged.gradeLevel),
       learningMode: normalizeLearningMode(merged.learningMode),
       skillLevel: normalizeSkillLevel(merged.skillLevel),
+      autoStartSubject: merged.autoStartSubject ?? false,
     };
     if (normalized.gradeLevel !== merged.gradeLevel) {
       window.localStorage.setItem(STORAGE_KEY, JSON.stringify(normalized));
