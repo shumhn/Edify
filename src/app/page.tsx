@@ -7,41 +7,45 @@ import { motion, useScroll, useTransform } from "framer-motion";
 
 const fadeIn = {
    initial: { opacity: 0, y: 20 },
-   animate: { opacity: 1, y: 0 },
-   transition: { duration: 0.5 }
+   animate: { opacity: 1, y: 0 }
+};
+
+const slideUp = {
+   initial: { opacity: 0, y: 40 },
+   animate: { opacity: 1, y: 0 }
 };
 
 const stagger = {
    animate: {
       transition: {
-         staggerChildren: 0.1
+         staggerChildren: 0.3
       }
    }
 };
 
 const features = [
    {
-      title: "Cognitive Architectures",
-      description: "Dynamic knowledge graphs that map concept dependencies and structural intersections in real-time.",
-      icon: <BrainCircuit className="h-6 w-6 text-white" />,
+      title: "AI-Generated Roadmaps",
+      description: "Just tell the engine your goal, and it instantly builds a custom path to get you there.",
+      icon: <Layers className="h-6 w-6 text-white" />,
       color: "bg-blue-500"
    },
    {
-      title: "Recursive Mastery",
-      description: "Self-correcting feedback loops that bank every error to recalibrate your entire learning trajectory.",
+      title: "Instant Practice Quizzes",
+      description: "Get practice questions generated on the fly, focusing specifically on what you find hardest.",
       icon: <Zap className="h-6 w-6 text-white" />,
       color: "bg-orange-500"
    },
    {
-      title: "Active Context Elicitation",
-      description: "Proactive behavioral interviews that extract student intent, skill level, and cognitive pace.",
-      icon: <Layout className="h-6 w-6 text-white" />,
+      title: "Visual Knowledge Maps",
+      description: "See your subjects as connected visual maps instead of just a boring list of chapters.",
+      icon: <BrainCircuit className="h-6 w-6 text-white" />,
       color: "bg-purple-500"
    },
    {
-      title: "Multi-Modal Intel Layer",
-      description: "Unified intelligence via FormulaCards, ConceptExplainers, and RoadmapTimelines for 360° mastery.",
-      icon: <Layers className="h-6 w-6 text-white" />,
+      title: "Live Mastery Tracking",
+      description: "The engine watches your progress and automatically adjusts your schedule in real-time.",
+      icon: <BarChart3 className="h-6 w-6 text-white" />,
       color: "bg-emerald-500"
    },
 ];
@@ -102,6 +106,10 @@ export default function Home() {
                   <span className="text-lg font-bold tracking-tight">AdaptiveStudy</span>
                </div>
                <div className="flex items-center gap-4">
+                  <div className="hidden sm:flex items-center gap-2 px-3 py-1.5 rounded-xl bg-slate-900/[0.03] border border-slate-900/5 transition-colors hover:bg-slate-900/[0.05]">
+                     <span className="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Powered by</span>
+                     <span className="text-[10px] font-black text-slate-900 uppercase tracking-widest">Tambo AI</span>
+                  </div>
                   <Link
                      href="/chat?mode=learn"
                      className="group relative overflow-hidden rounded-full bg-slate-900 px-6 py-2 text-sm font-semibold text-white transition-all hover:scale-105 hover:shadow-xl hover:shadow-slate-900/20"
@@ -124,7 +132,7 @@ export default function Home() {
                   className="mx-auto max-w-4xl space-y-8"
                >
                   {/* Badge */}
-                  <motion.div variants={fadeIn} className="flex justify-center">
+                  <motion.div variants={fadeIn} transition={{ duration: 1, ease: "easeOut" }} className="flex justify-center">
                      <div className="group relative inline-flex items-center gap-2 rounded-full border border-orange-200 bg-orange-50/50 px-4 py-1.5 backdrop-blur-sm transition-colors hover:bg-orange-100/50">
                         <span className="relative flex h-2 w-2">
                            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-orange-400 opacity-75"></span>
@@ -135,19 +143,31 @@ export default function Home() {
                   </motion.div>
 
                   {/* Headline */}
-                  <motion.h1 variants={fadeIn} className="text-6xl font-extrabold tracking-tight text-slate-900 sm:text-8xl leading-[0.9]">
+                  <motion.h1
+                     variants={fadeIn}
+                     transition={{ duration: 1.2, delay: 0.2, ease: "easeOut" }}
+                     className="text-6xl font-extrabold tracking-tight text-slate-900 sm:text-8xl leading-[0.9]"
+                  >
                      The UI that <br />
                      <span className="bg-gradient-to-r from-orange-500 to-red-600 bg-clip-text text-transparent">studies with you.</span>
                   </motion.h1>
 
-                  <motion.p variants={fadeIn} className="mx-auto max-w-2xl text-xl text-slate-600 font-medium">
+                  <motion.p
+                     variants={fadeIn}
+                     transition={{ duration: 1.2, delay: 0.4, ease: "easeOut" }}
+                     className="mx-auto max-w-2xl text-xl text-slate-600 font-medium"
+                  >
                      Instantly generate adaptive roadmaps, interactive quizzes, and
                      <span className="text-slate-900 font-bold decoration-orange-400 decoration-2 underline underline-offset-4"> visual knowledge graphs</span> to master any subject with ease.
                   </motion.p>
 
                   {/* Input Action - Glassmorphism */}
                   <ApiKeyCheck>
-                     <motion.div variants={fadeIn} className="mx-auto mt-10 max-w-2xl relative z-10">
+                     <motion.div
+                        variants={fadeIn}
+                        transition={{ duration: 1.2, delay: 0.6, ease: "easeOut" }}
+                        className="mx-auto mt-10 max-w-2xl relative z-10"
+                     >
                         <div className="group relative">
                            <div className="absolute -inset-1 rounded-2xl bg-gradient-to-r from-orange-500 via-purple-500 to-blue-500 opacity-30 blur-lg transition duration-500 group-hover:opacity-50" />
                            <div className="relative flex items-center gap-2 rounded-2xl border border-white/50 bg-white/80 p-2 shadow-2xl backdrop-blur-xl ring-1 ring-black/5">
@@ -376,8 +396,8 @@ export default function Home() {
             {/* BENTO GRID FEATURES */}
             <section className="mx-auto max-w-7xl px-6 lg:px-8 py-20">
                <div className="mb-16 text-center">
-                  <span className="text-sm font-bold uppercase tracking-widest text-orange-600">Why Adaptive?</span>
-                  <h2 className="mt-2 text-4xl font-bold text-slate-900">Engineered for Velocity.</h2>
+                  <span className="text-sm font-bold uppercase tracking-widest text-orange-600">The Tambo Advantage</span>
+                  <h2 className="mt-2 text-4xl font-bold text-slate-900">Why Choose Us?</h2>
                </div>
 
                <div className="grid gap-6 md:grid-cols-3">
@@ -403,9 +423,60 @@ export default function Home() {
             </section>
 
             {/* FOOTER */}
-            <footer className="mt-32 border-t border-slate-200 bg-white pt-16 pb-12">
-               <div className="mx-auto max-w-7xl px-6 text-center lg:px-8">
-                  <p className="text-sm text-slate-500">&copy; 2024 Adaptive Study Coach. Built for the future.</p>
+            <footer className="mt-32 border-t border-slate-200 bg-white/80 backdrop-blur-xl pt-24 pb-12">
+               <div className="mx-auto max-w-7xl px-6 lg:px-8">
+                  <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-12 pb-16">
+                     <div className="col-span-2 lg:col-span-2">
+                        <div className="flex items-center gap-2 mb-6">
+                           <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-gradient-to-br from-orange-500 to-red-600 text-white font-bold text-sm">
+                              AS
+                           </div>
+                           <span className="text-lg font-bold tracking-tight">AdaptiveStudy</span>
+                        </div>
+                        <p className="text-slate-500 text-sm max-w-xs leading-relaxed">
+                           The Generative UI engine for high-velocity STEM mastery. Powered by the next generation of Tambo AI infrastructure.
+                        </p>
+                     </div>
+                     <div>
+                        <h4 className="font-bold text-sm text-slate-900 uppercase tracking-widest mb-6">Product</h4>
+                        <ul className="space-y-4 text-sm text-slate-500">
+                           <li><Link href="/chat?mode=learn" className="hover:text-orange-600 transition-colors">Pathways</Link></li>
+                           <li><Link href="/chat?mode=exam" className="hover:text-orange-600 transition-colors">Exam Prep</Link></li>
+                           <li><Link href="#" className="hover:text-orange-600 transition-colors">Catalog</Link></li>
+                           <li><Link href="#" className="hover:text-orange-600 transition-colors">Enterprise</Link></li>
+                        </ul>
+                     </div>
+                     <div>
+                        <h4 className="font-bold text-sm text-slate-900 uppercase tracking-widest mb-6">Resources</h4>
+                        <ul className="space-y-4 text-sm text-slate-500">
+                           <li><Link href="#" className="hover:text-orange-600 transition-colors">Documentation</Link></li>
+                           <li><Link href="#" className="hover:text-orange-600 transition-colors">API Reference</Link></li>
+                           <li><Link href="#" className="hover:text-orange-600 transition-colors">Community</Link></li>
+                        </ul>
+                     </div>
+                     <div>
+                        <h4 className="font-bold text-sm text-slate-900 uppercase tracking-widest mb-6">Connect</h4>
+                        <ul className="space-y-4 text-sm text-slate-500">
+                           <li><Link href="#" className="hover:text-orange-600 transition-colors">Twitter</Link></li>
+                           <li><Link href="#" className="hover:text-orange-600 transition-colors">GitHub</Link></li>
+                           <li><Link href="#" className="hover:text-orange-600 transition-colors">Discord</Link></li>
+                        </ul>
+                     </div>
+                  </div>
+                  <div className="pt-8 border-t border-slate-100 flex flex-col md:flex-row justify-between items-center gap-6">
+                     <div className="flex flex-col items-center md:items-start gap-2">
+                        <p className="text-xs text-slate-400">&copy; 2026 Adaptive Study Coach. All rights reserved.</p>
+                        <div className="flex items-center gap-2 px-2 py-1 rounded-lg bg-slate-50 border border-slate-100">
+                           <span className="text-[9px] font-bold text-slate-400 uppercase tracking-widest">Built with</span>
+                           <span className="text-[9px] font-black text-slate-900 uppercase tracking-widest">Tambo Generative Engine</span>
+                        </div>
+                     </div>
+                     <div className="flex gap-8 text-xs text-slate-400">
+                        <Link href="#" className="hover:text-slate-600">Privacy Policy</Link>
+                        <Link href="#" className="hover:text-slate-600">Terms of Service</Link>
+                        <Link href="#" className="hover:text-slate-600">Cookie Policy</Link>
+                     </div>
+                  </div>
                </div>
             </footer>
 
