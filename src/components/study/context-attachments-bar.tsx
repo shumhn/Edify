@@ -17,6 +17,7 @@ export function ContextAttachmentsBar({ className }: { className?: string }) {
   const learningMode = profile.learningMode ?? "exam";
   const [value, setValue] = useState("");
   const [isOpen, setIsOpen] = useState(false);
+  const hasAttachments = attachments.length > 0;
 
   const quickAttachments =
     learningMode === "learn"
@@ -85,11 +86,11 @@ export function ContextAttachmentsBar({ className }: { className?: string }) {
           className="flex items-center gap-2 rounded-full border border-slate-200 bg-white px-3 py-1 text-[11px] font-semibold text-slate-700 shadow-sm transition hover:border-slate-300"
         >
           <Paperclip className="h-3.5 w-3.5" />
-          Notes ({attachments.length})
+          Notes {hasAttachments ? `(${attachments.length})` : ""}
           {isOpen ? <ChevronUp className="h-3 w-3" /> : <ChevronDown className="h-3 w-3" />}
         </button>
         <div className="flex items-center gap-2">
-          {attachments.length > 0 && (
+          {hasAttachments && (
             <button
               type="button"
               onClick={clearContextAttachments}
@@ -110,24 +111,26 @@ export function ContextAttachmentsBar({ className }: { className?: string }) {
         </div>
       </div>
 
-      <div className="mt-2 flex flex-wrap gap-2">
-        {attachments.map((attachment) => (
-          <span
-            key={attachment.id}
-            className="inline-flex items-center gap-2 rounded-full border border-slate-200 bg-white px-3 py-1 text-[11px] font-semibold text-slate-700 shadow-sm"
-          >
-            {attachment.displayName ?? "Attachment"}
-            <button
-              type="button"
-              onClick={() => removeContextAttachment(attachment.id)}
-              className="text-slate-400 hover:text-slate-700"
-              aria-label="Remove attachment"
+      {hasAttachments && (
+        <div className="mt-2 flex flex-wrap gap-2">
+          {attachments.map((attachment) => (
+            <span
+              key={attachment.id}
+              className="inline-flex items-center gap-2 rounded-full border border-slate-200 bg-white px-3 py-1 text-[11px] font-semibold text-slate-700 shadow-sm"
             >
-              <X className="h-3 w-3" />
-            </button>
-          </span>
-        ))}
-      </div>
+              {attachment.displayName ?? "Attachment"}
+              <button
+                type="button"
+                onClick={() => removeContextAttachment(attachment.id)}
+                className="text-slate-400 hover:text-slate-700"
+                aria-label="Remove attachment"
+              >
+                <X className="h-3 w-3" />
+              </button>
+            </span>
+          ))}
+        </div>
+      )}
 
       {isOpen && (
         <>

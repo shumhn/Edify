@@ -158,7 +158,17 @@ export function SubjectTrackCard({
           </div>
 
           {isLoadingTopics && (
-            <p className="mt-4 text-xs text-slate-500">Loading topic map...</p>
+            <div className="mt-4 space-y-3">
+              <p className="text-xs text-slate-500">Loading topic map...</p>
+              <div className="grid gap-2 sm:grid-cols-2">
+                {Array.from({ length: 6 }).map((_, index) => (
+                  <div
+                    key={`topic-skeleton-${index}`}
+                    className="h-10 rounded-lg bg-slate-100 animate-pulse"
+                  />
+                ))}
+              </div>
+            </div>
           )}
         </>
       )}
