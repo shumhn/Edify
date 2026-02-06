@@ -323,7 +323,9 @@ const MessageContent = React.forwardRef<HTMLDivElement, MessageContentProps>(
 
     const markdownContent = React.useMemo(() => {
       const result = convertContentToMarkdown(contentToRender);
-      return result;
+      return result
+        .replace(/<json>/gi, "```json\n")
+        .replace(/<\/json>/gi, "\n```");
     }, [contentToRender]);
     const hasContent = React.useMemo(
       () => checkHasContent(contentToRender),

@@ -34,10 +34,10 @@ export function DiagnosticStartCard() {
     const baseMessage =
       mode === "exam"
         ? `I'm preparing for an exam in ${days} days. My subject is ${subject}. I'm ${skillLevel} level.`
-        : `I want to learn ${subject} as a ${skillLevel} learner. My pace is ${sessionsPerWeek} sessions per week.`;
+        : `I want to learn ${subject} as a ${skillLevel} learner. My pace is ${sessionsPerWeek} sessions per week. Do not ask about exams or deadlines.`;
 
     sendThreadMessage(
-      `${baseMessage} Show the topic list and ask me to pick my weakest topic. Respond with TopicListCard.`,
+      `${baseMessage} Show the topic list for ${subject} only and ask me to pick my weakest topic. Respond with TopicListCard.`,
     );
   };
 

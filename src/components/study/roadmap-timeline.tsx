@@ -9,7 +9,7 @@ export const roadmapTimelineSchema = z.object({
     z.object({
       label: z.string(),
       focus: z.string(),
-      tasks: z.array(z.string()).min(1),
+      tasks: z.array(z.string()).optional(),
     }),
   ),
 });
@@ -51,9 +51,11 @@ export function RoadmapTimeline({ title, timeframe, steps }: RoadmapTimelineProp
               </div>
             </div>
             <ul className="mt-3 space-y-1 text-sm text-slate-600">
-              {step.tasks.map((task, taskIndex) => (
-                <li key={`${step.label}-${taskIndex}`}>• {task}</li>
-              ))}
+              {(Array.isArray(step.tasks) ? step.tasks : []).map(
+                (task, taskIndex) => (
+                  <li key={`${step.label}-${taskIndex}`}>• {task}</li>
+                ),
+              )}
             </ul>
           </div>
         ))}

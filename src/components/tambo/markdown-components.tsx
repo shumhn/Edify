@@ -137,6 +137,7 @@ export const createMarkdownComponents = (): Record<
 
     const highlighted = React.useMemo(() => {
       if (!match || !looksLikeCode(deferredContent)) return null;
+      if (!hljs.getLanguage(match[1])) return deferredContent;
       try {
         return hljs.highlight(deferredContent, { language: match[1] }).value;
       } catch {

@@ -74,7 +74,7 @@ export function ContextAttachmentsBar({ className }: { className?: string }) {
   return (
     <div
       className={cn(
-        "mt-2 rounded-xl border border-slate-200 bg-white/90 px-3 py-3 text-xs text-slate-600 shadow-sm",
+        "mt-2 rounded-xl border border-slate-200 bg-white/90 px-3 py-2 text-xs text-slate-600 shadow-sm",
         className,
       )}
     >
@@ -85,7 +85,7 @@ export function ContextAttachmentsBar({ className }: { className?: string }) {
           className="flex items-center gap-2 rounded-full border border-slate-200 bg-white px-3 py-1 text-[11px] font-semibold text-slate-700 shadow-sm transition hover:border-slate-300"
         >
           <Paperclip className="h-3.5 w-3.5" />
-          Context ({attachments.length})
+          Notes ({attachments.length})
           {isOpen ? <ChevronUp className="h-3 w-3" /> : <ChevronDown className="h-3 w-3" />}
         </button>
         <div className="flex items-center gap-2">
@@ -111,11 +111,6 @@ export function ContextAttachmentsBar({ className }: { className?: string }) {
       </div>
 
       <div className="mt-2 flex flex-wrap gap-2">
-        {attachments.length === 0 && (
-          <span className="rounded-full border border-dashed border-slate-200 bg-white px-3 py-1 text-[11px] text-slate-400">
-            Add context for the next message
-          </span>
-        )}
         {attachments.map((attachment) => (
           <span
             key={attachment.id}
