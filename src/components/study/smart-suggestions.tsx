@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useMemo, useRef, useState } from "react";
-import { useTambo, useTamboThread } from "@tambo-ai/react";
+import { useTambo, useTamboThread, useTamboThreadInput } from "@tambo-ai/react";
 import { getStemTopicPack } from "@/services/study-tools";
 import { cn } from "@/lib/utils";
 
@@ -63,6 +63,7 @@ export function SmartSuggestions({
   maxVisible?: number;
 }) {
   const { sendThreadMessage, isIdle } = useTamboThread();
+  const { setValue } = useTamboThreadInput();
   const subjectSpec = subjectPalette[subject] ?? subjectPalette.Physics;
   const [topicPack, setTopicPack] = useState<string[]>([]);
   const { thread } = useTambo();
@@ -270,6 +271,10 @@ export function SmartSuggestions({
     }
   };
 
+  const handlePrefill = (item: SuggestionItem) => {
+    setValue(item.prompt);
+  };
+
   const subtitle =
     mode === "exam"
       ? `${subject} exam prep`
@@ -349,15 +354,24 @@ export function SmartSuggestions({
       </div>
       <div className="mt-2 flex flex-wrap gap-2">
         {visible.map((item) => (
-          <button
-            key={item.id}
-            type="button"
-            onClick={() => handleClick(item)}
-            disabled={!isIdle}
-            className="px-3 py-1.5 rounded-full text-xs font-medium transition-colors shadow-sm border border-slate-200 text-slate-700 hover:border-slate-300 hover:text-slate-900 disabled:opacity-60"
-          >
-            {item.title}
-          </button>
+          <div key={item.id} className="flex items-center">
+            <button
+              type="button"
+              onClick={() => handleClick(item)}
+              disabled={!isIdle}
+              className="px-3 py-1.5 rounded-full text-xs font-medium transition-colors shadow-sm border border-slate-200 text-slate-700 hover:border-slate-300 hover:text-slate-900 disabled:opacity-60"
+            >
+              {item.title}
+            </button>
+            <button
+              type="button"
+              onClick={() => handlePrefill(item)}
+              className="ml-1 rounded-full border border-slate-200 px-2 py-1 text-[10px] font-semibold text-slate-400 hover:border-slate-300 hover:text-slate-700"
+              title="Prefill input"
+            >
+              Edit
+            </button>
+          </div>
         ))}
         {allSuggestions.length > maxVisible && (
           <button
