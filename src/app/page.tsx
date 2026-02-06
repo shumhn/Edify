@@ -2,7 +2,7 @@
 
 import { ApiKeyCheck } from "@/components/ApiKeyCheck";
 import Link from "next/link";
-import { ArrowRight, BarChart3, BookOpen, BrainCircuit, CheckCircle2, ChevronRight, Layers, Layout, Zap, Sparkles } from "lucide-react";
+import { ArrowRight, BarChart3, BookOpen, BrainCircuit, Layers, Layout, Zap, Sparkles } from "lucide-react";
 import { motion, useScroll, useTransform } from "framer-motion";
 
 const fadeIn = {
@@ -49,27 +49,31 @@ const features = [
 const tracks = [
    {
       title: "Physics",
-      description: "Mechanics, Waves, Optics",
       subject: "Physics",
-      gradient: "from-blue-600 to-cyan-400"
+      description: "Classical Mechanics, Electromagnetism, & Quantum Theory",
+      gradient: "from-blue-500 to-cyan-500",
+      stats: { modules: "14", level: "Advanced", time: "18h" }
    },
    {
       title: "Mathematics",
-      description: "Calculus, Algebra, Stats",
-      subject: "Math",
-      gradient: "from-orange-600 to-amber-400"
+      subject: "Mathematics",
+      description: "Multivariable Calculus, Linear Algebra, & Statistics",
+      gradient: "from-orange-500 to-amber-500",
+      stats: { modules: "24", level: "Core", time: "24h" }
    },
    {
       title: "Chemistry",
-      description: "Organic, Inorganic, Physical",
       subject: "Chemistry",
-      gradient: "from-emerald-600 to-teal-400"
+      description: "Organic Synthesis, Thermodynamics, & Kinetics",
+      gradient: "from-emerald-500 to-teal-500",
+      stats: { modules: "18", level: "Mastery", time: "12h" }
    },
    {
       title: "Comp Sci",
-      description: "Algorithms, Data Structures",
       subject: "Computer Science",
-      gradient: "from-purple-600 to-pink-400"
+      description: "Algorithms, Distributed Systems, & AI Architectures",
+      gradient: "from-purple-500 to-pink-500",
+      stats: { modules: "32", level: "Pro", time: "32h" }
    },
 ];
 
@@ -80,15 +84,13 @@ export default function Home() {
    return (
       <div className="min-h-screen bg-slate-50 font-sans text-slate-900 selection:bg-orange-200">
 
-         {/* Animated Background Blobs */}
-         <motion.div
-            style={{ y }}
-            className="fixed inset-0 z-0 overflow-hidden pointer-events-none"
-         >
-            <div className="absolute top-0 left-1/4 h-96 w-96 animate-blob rounded-full bg-orange-200 opacity-40 mix-blend-multiply blur-3xl filter" />
-            <div className="absolute top-0 right-1/4 h-96 w-96 animate-blob animation-delay-2000 rounded-full bg-blue-200 opacity-40 mix-blend-multiply blur-3xl filter" />
-            <div className="absolute -bottom-32 left-1/3 h-96 w-96 animate-blob animation-delay-4000 rounded-full bg-purple-200 opacity-40 mix-blend-multiply blur-3xl filter" />
-         </motion.div>
+         {/* Background - Animated Radiant Blobs */}
+         <div className="fixed inset-0 z-0 bg-slate-50 overflow-hidden pointer-events-none">
+            <div className="absolute top-[-10%] left-[-10%] w-[600px] h-[600px] bg-orange-200/40 rounded-full mix-blend-multiply filter blur-3xl opacity-70 animate-blob" />
+            <div className="absolute top-[-5%] right-[-5%] w-[500px] h-[500px] bg-purple-200/40 rounded-full mix-blend-multiply filter blur-3xl opacity-70 animate-blob animation-delay-2000" />
+            <div className="absolute bottom-[-10%] left-[20%] w-[550px] h-[550px] bg-blue-200/40 rounded-full mix-blend-multiply filter blur-3xl opacity-70 animate-blob animation-delay-4000" />
+            <div className="absolute bottom-[20%] right-[-10%] w-[450px] h-[450px] bg-pink-200/40 rounded-full mix-blend-multiply filter blur-3xl opacity-70 animate-blob animation-delay-2000" />
+         </div>
 
          {/* Glass Navigation */}
          <nav className="fixed left-0 right-0 top-0 z-50 border-b border-white/20 bg-white/60 backdrop-blur-xl">
@@ -139,8 +141,8 @@ export default function Home() {
                   </motion.h1>
 
                   <motion.p variants={fadeIn} className="mx-auto max-w-2xl text-xl text-slate-600 font-medium">
-                     Forget static textbooks. Paste your topic and watch our engine build a
-                     <span className="text-slate-900 font-bold decoration-orange-400 decoration-2 underline underline-offset-4"> tailored curriculum</span> in seconds.
+                     Instantly generate adaptive roadmaps, interactive quizzes, and
+                     <span className="text-slate-900 font-bold decoration-orange-400 decoration-2 underline underline-offset-4"> visual knowledge graphs</span> to master any subject with ease.
                   </motion.p>
 
                   {/* Input Action - Glassmorphism */}
@@ -181,67 +183,108 @@ export default function Home() {
                </motion.div>
             </section>
 
+            {/* DASHBOARD PREVIEW - Ultra-Modern Premium Design (Refined Border Clarity) */}
+            <section className="relative py-24 overflow-hidden">
+               {/* Background Glowing Orbs */}
+               <div className="absolute top-1/2 left-1/4 -translate-y-1/2 w-[500px] h-[500px] bg-orange-400/20 blur-[120px] rounded-full pointer-events-none" />
+               <div className="absolute top-1/2 right-1/4 -translate-y-1/2 w-[400px] h-[400px] bg-blue-400/10 blur-[100px] rounded-full pointer-events-none" />
 
-            {/* DASHBOARD PREVIEW - Tilted 3D Effect */}
-            <section className="relative mt-24 mb-32 perspective-1000">
-               <div className="absolute inset-0 bg-gradient-to-b from-transparent via-slate-50/50 to-slate-50 pointer-events-none z-10" />
                <motion.div
-                  initial={{ opacity: 0, rotateX: 20, y: 100 }}
-                  whileInView={{ opacity: 1, rotateX: 0, y: 0 }}
-                  transition={{ duration: 0.8, ease: "easeOut" }}
+                  initial={{ opacity: 0, scale: 0.95, y: 40 }}
+                  whileInView={{ opacity: 1, scale: 1, y: 0 }}
+                  transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
                   viewport={{ once: true }}
-                  className="mx-auto max-w-6xl px-4"
+                  className="mx-auto max-w-6xl px-6"
                >
-                  <div className="relative rounded-3xl border border-white/50 bg-white/40 p-3 shadow-[0_0_100px_-20px_rgba(0,0,0,0.1)] backdrop-blur-md">
-                     <div className="rounded-2xl border border-slate-200 bg-white p-6 md:p-10 shadow-sm relative overflow-hidden">
-                        {/* Decorative Elements */}
-                        <div className="absolute top-0 right-0 p-10 opacity-5">
-                           <BrainCircuit className="h-64 w-64" />
-                        </div>
+                  {/* Floating Glass Container - Sharpened Borders */}
+                  <div className="group relative rounded-[2.5rem] border border-slate-200 bg-white/70 p-4 shadow-[0_32px_128px_-16px_rgba(0,0,0,0.12)] backdrop-blur-2xl">
+                     <div className="rounded-[2rem] bg-white p-8 md:p-12 shadow-sm border border-slate-100 overflow-hidden relative">
+                        {/* Decorative Background Pattern */}
+                        <div className="absolute inset-0 opacity-[0.03] pointer-events-none" style={{ backgroundImage: `radial-gradient(circle at 2px 2px, black 1px, transparent 0)`, backgroundSize: '24px 24px' }} />
 
-                        <div className="grid gap-12 lg:grid-cols-[1fr_300px]">
-                           <div className="space-y-8">
-                              <div>
-                                 <h3 className="text-2xl font-bold text-slate-900">Your Learning Pulse</h3>
-                                 <p className="text-slate-500">Real-time adaptation engine active</p>
+                        <div className="relative z-10 grid gap-12 lg:grid-cols-[1fr_340px]">
+                           {/* Main Stats Area */}
+                           <div className="space-y-10">
+                              <div className="flex items-center justify-between">
+                                 <div>
+                                    <h3 className="text-3xl font-black tracking-tighter text-slate-900">Your Learning Pulse</h3>
+                                    <p className="text-slate-500 font-medium mt-1">Real-time adaptation engine active</p>
+                                 </div>
+                                 <div className="hidden sm:flex items-center gap-2 px-3 py-1.5 rounded-full bg-slate-50 border border-slate-200">
+                                    <div className="h-2 w-2 rounded-full bg-orange-500" />
+                                    <span className="text-[10px] font-bold text-slate-600 uppercase tracking-widest">v2.0 Core</span>
+                                 </div>
                               </div>
-                              <div className="grid grid-cols-2 gap-4">
+
+                              <div className="grid sm:grid-cols-2 gap-6">
                                  {[
-                                    { label: "Mastery", val: "84%", color: "text-green-600", bg: "bg-green-100" },
-                                    { label: "Streak", val: "12 Days", color: "text-orange-600", bg: "bg-orange-100" },
+                                    { label: "Mastery Score", val: "84", unit: "%", sub: "+2.4% this week", icon: <BarChart3 />, color: "from-emerald-400 to-emerald-600", bg: "bg-emerald-50", borderColor: "border-emerald-100" },
+                                    { label: "Current Streak", val: "12", unit: "days", sub: "Personal Best: 14", icon: <Zap />, color: "from-orange-400 to-red-500", bg: "bg-orange-50", borderColor: "border-orange-100" },
                                  ].map((stat, i) => (
-                                    <div key={i} className="rounded-2xl bg-slate-50 p-6 transition-colors hover:bg-slate-100">
-                                       <div className={`mb-3 w-fit rounded-lg ${stat.bg} p-2`}>
-                                          <BarChart3 className={`h-5 w-5 ${stat.color}`} />
+                                    <div key={i} className="relative group/card overflow-hidden rounded-3xl bg-slate-50/40 border border-slate-200 p-8 transition-all hover:bg-white hover:border-slate-300 hover:shadow-2xl hover:shadow-slate-200/50 hover:-translate-y-1">
+                                       <div className="flex items-center gap-4 mb-8">
+                                          <div className={`p-4 rounded-2xl ${stat.bg} ${stat.borderColor} border text-slate-900 shadow-sm transition-transform group-hover/card:scale-110`}>
+                                             {stat.icon}
+                                          </div>
+                                          <div>
+                                             <p className="text-xs font-bold text-slate-400 uppercase tracking-widest leading-none">{stat.label}</p>
+                                             <p className="text-xs font-semibold text-emerald-600 mt-1">{stat.sub}</p>
+                                          </div>
                                        </div>
-                                       <p className="text-sm font-medium text-slate-500">{stat.label}</p>
-                                       <p className="text-3xl font-bold text-slate-900">{stat.val}</p>
+
+                                       <div className="flex items-baseline gap-1">
+                                          <span className="text-7xl font-black tracking-tighter text-slate-900">{stat.val}</span>
+                                          <span className="text-2xl font-bold text-slate-400">{stat.unit}</span>
+                                       </div>
+
+                                       <div className="mt-8 relative h-2 w-full rounded-full bg-slate-100 overflow-hidden text-slate-400">
+                                          <motion.div
+                                             initial={{ width: 0 }}
+                                             whileInView={{ width: stat.val + "%" }}
+                                             transition={{ duration: 1.5, ease: [0.16, 1, 0.3, 1] }}
+                                             className={`absolute left-0 top-0 bottom-0 bg-gradient-to-r ${stat.color} rounded-full`}
+                                          >
+                                             <div className="absolute inset-0 bg-[linear-gradient(45deg,rgba(255,255,255,0.2)_25%,transparent_25%,transparent_50%,rgba(255,255,255,0.2)_50%,rgba(255,255,255,0.2)_75%,transparent_75%,transparent)] bg-[length:1rem_1rem] animate-[shimmer_2s_linear_infinite]" />
+                                          </motion.div>
+                                       </div>
                                     </div>
                                  ))}
                               </div>
                            </div>
 
-                           <div className="rounded-2xl bg-slate-900 p-6 text-white shadow-2xl">
-                              <div className="mb-6 flex items-center justify-between">
-                                 <span className="font-bold">Next Up</span>
-                                 <span className="flex h-2 w-2 rounded-full bg-orange-500 animate-pulse" />
-                              </div>
-                              <div className="space-y-4">
-                                 {[1, 2, 3].map((_, i) => (
-                                    <div key={i} className="flex items-center gap-3 rounded-lg bg-white/10 p-3 backdrop-blur-sm transition hover:bg-white/20 cursor-pointer">
-                                       <div className="rounded-md bg-orange-500 p-2">
-                                          <Layout className="h-4 w-4 text-white" />
-                                       </div>
-                                       <div>
-                                          <p className="text-sm font-medium">Kinematics Drill {i + 1}</p>
-                                          <p className="text-xs text-slate-300">5 mins • High Impact</p>
-                                       </div>
+                           {/* Sidebar / Queue Area */}
+                           <div className="flex flex-col">
+                              <div className="rounded-3xl bg-slate-900 p-8 text-white shadow-2xl relative overflow-hidden flex-1 flex flex-col border border-slate-800">
+                                 <div className="absolute top-0 right-0 w-32 h-32 bg-orange-500/10 blur-3xl rounded-full" />
+
+                                 <div className="relative z-10 space-y-8 flex-1">
+                                    <div className="flex items-center justify-between">
+                                       <h4 className="font-bold text-lg tracking-tight">Focus Flow</h4>
+                                       <span className="flex h-2 w-2 rounded-full bg-orange-500 animate-ping" />
                                     </div>
-                                 ))}
+
+                                    <div className="space-y-4">
+                                       {[1, 2, 3].map((_, i) => (
+                                          <div key={i} className="group/item flex items-center gap-4 rounded-2xl bg-white/5 border border-white/10 p-4 transition-all hover:bg-white/10 hover:border-white/20 cursor-pointer">
+                                             <div className="h-10 w-10 flex items-center justify-center rounded-xl bg-orange-500/20 border border-orange-500/20 text-orange-400 group-hover/item:bg-orange-500 group-hover/item:text-white transition-all">
+                                                <Layout className="h-5 w-5" />
+                                             </div>
+                                             <div>
+                                                <p className="text-sm font-bold leading-tight">Kinematics Drill {i + 1}</p>
+                                                <p className="text-[10px] text-slate-400 font-medium uppercase tracking-wider mt-0.5">5m • High Yield</p>
+                                             </div>
+                                          </div>
+                                       ))}
+                                    </div>
+                                 </div>
+
+                                 <button className="relative z-10 mt-8 group overflow-hidden rounded-2xl bg-white px-8 py-5 text-sm font-black text-slate-900 transition-all hover:bg-slate-100 hover:scale-[1.02] active:scale-[0.98] border border-white">
+                                    <span className="relative z-10 flex items-center justify-center gap-2 uppercase tracking-widest">
+                                       Enter Stream
+                                       <ArrowRight className="h-5 w-5 transition-transform group-hover:translate-x-1" />
+                                    </span>
+                                 </button>
                               </div>
-                              <button className="mt-6 w-full rounded-lg bg-white py-3 text-sm font-bold text-slate-900 transition hover:bg-slate-200">
-                                 Resume Stream
-                              </button>
                            </div>
                         </div>
                      </div>
@@ -249,6 +292,86 @@ export default function Home() {
                </motion.div>
             </section>
 
+            {/* TRACKS / SUBJECTS */}
+            <section className="relative py-24">
+               <div className="absolute inset-0 bg-slate-900 skew-y-3 transform origin-bottom-right translate-y-20 z-0" />
+               <div className="relative z-10 mx-auto max-w-7xl px-6 lg:px-8">
+                  <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-16 text-white">
+                     <div>
+                        <h2 className="text-4xl font-bold">Pick your path.</h2>
+                        <p className="mt-2 text-slate-400">Curriculums generated in real-time.</p>
+                     </div>
+                     <button className="rounded-full border border-white/20 bg-white/10 px-6 py-2 backdrop-blur-sm transition hover:bg-white/20">
+                        View full catalog
+                     </button>
+                  </div>
+
+                  <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+                     {tracks.map((track, i) => (
+                        <motion.div
+                           key={track.title}
+                           whileHover={{ y: -12, scale: 1.02 }}
+                           className="group relative h-[420px] cursor-pointer overflow-hidden rounded-[2.5rem]"
+                        >
+                           {/* Vibrant Background Gradient - Restored Intensity */}
+                           <div className={`absolute inset-0 bg-gradient-to-br ${track.gradient} opacity-90 transition-all duration-700 group-hover:opacity-100`} />
+                           <div className="absolute inset-0 bg-black/10 mix-blend-overlay" />
+
+                           {/* Card Content */}
+                           <div className="absolute inset-0 p-8 flex flex-col">
+                              {/* Top Section */}
+                              <div className="flex items-start justify-between">
+                                 <div className="h-14 w-14 rounded-2xl bg-white/20 p-3.5 text-white shadow-xl backdrop-blur-md transition-transform duration-500 group-hover:rotate-12">
+                                    <BookOpen className="h-full w-full" />
+                                 </div>
+                                 <div className="flex flex-col items-end gap-1">
+                                    <span className="rounded-full bg-black/20 px-3 py-1 text-[10px] font-bold uppercase tracking-widest text-white backdrop-blur-md">
+                                       {track.stats.level}
+                                    </span>
+                                 </div>
+                              </div>
+
+                              {/* Title & Desc */}
+                              <div className="mt-8">
+                                 <h3 className="text-3xl font-black tracking-tight text-white">{track.title}</h3>
+                                 <p className="mt-3 text-sm font-bold leading-relaxed text-white/80 group-hover:text-white transition-colors">
+                                    {track.description}
+                                 </p>
+                              </div>
+
+                              {/* Separator */}
+                              <div className="mt-auto pt-6 border-t border-white/20">
+                                 <div className="flex items-center justify-between">
+                                    <div className="flex flex-col">
+                                       <span className="text-[10px] font-bold uppercase tracking-widest text-white/50">Duration</span>
+                                       <span className="text-sm font-bold text-white">{track.stats.time}</span>
+                                    </div>
+                                    <div className="flex flex-col items-end">
+                                       <span className="text-[10px] font-bold uppercase tracking-widest text-white/50">Modules</span>
+                                       <span className="text-sm font-bold text-white">{track.stats.modules} Units</span>
+                                    </div>
+                                 </div>
+
+                                 <div className="mt-8 flex items-center justify-center">
+                                    <div className="flex w-full items-center justify-center gap-2 rounded-xl bg-white px-4 py-3 text-sm font-black text-slate-900 shadow-lg transition-all hover:scale-105 active:scale-95">
+                                       Start Learning
+                                       <ArrowRight className="h-4 w-4" />
+                                    </div>
+                                 </div>
+                              </div>
+                           </div>
+
+                           <Link
+                              href={`/chat?mode=learn&subject=${encodeURIComponent(track.subject)}`}
+                              className="absolute inset-0 z-20"
+                           >
+                              <span className="sr-only">Start {track.subject}</span>
+                           </Link>
+                        </motion.div>
+                     ))}
+                  </div>
+               </div>
+            </section>
 
             {/* BENTO GRID FEATURES */}
             <section className="mx-auto max-w-7xl px-6 lg:px-8 py-20">
@@ -276,60 +399,6 @@ export default function Home() {
                         <div className={`absolute -right-10 -bottom-10 h-64 w-64 rounded-full ${feature.color} opacity-10 blur-3xl`} />
                      </motion.div>
                   ))}
-               </div>
-            </section>
-
-
-            {/* TRACKS / SUBJECTS */}
-            <section className="relative py-24">
-               <div className="absolute inset-0 bg-slate-900 skew-y-3 transform origin-bottom-right translate-y-20 z-0" />
-               <div className="relative z-10 mx-auto max-w-7xl px-6 lg:px-8">
-                  <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-16 text-white">
-                     <div>
-                        <h2 className="text-4xl font-bold">Pick your path.</h2>
-                        <p className="mt-2 text-slate-400">Curriculums generated in real-time.</p>
-                     </div>
-                     <button className="rounded-full border border-white/20 bg-white/10 px-6 py-2 backdrop-blur-sm transition hover:bg-white/20">
-                        View full catalog
-                     </button>
-                  </div>
-
-                  <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-                     {tracks.map((track, i) => (
-                        <motion.div
-                           key={track.title}
-                           whileHover={{ y: -10 }}
-                           className="group relative h-80 cursor-pointer overflow-hidden rounded-3xl bg-slate-800"
-                        >
-                           {/* Background Gradient */}
-                           <div className={`absolute inset-0 bg-gradient-to-br ${track.gradient} opacity-80 transition-opacity duration-500 group-hover:opacity-100`} />
-
-                           <div className="absolute inset-0 p-8 flex flex-col justify-between">
-                              <div>
-                                 <div className="h-10 w-10 text-white opacity-80">
-                                    <BookOpen />
-                                 </div>
-                                 <h3 className="mt-4 text-2xl font-bold text-white">{track.title}</h3>
-                              </div>
-
-                              <div>
-                                 <p className="text-sm font-medium text-white/80">{track.description}</p>
-                                 <div className="mt-4 flex items-center gap-2 text-white font-bold opacity-0 transform translate-y-4 transition-all duration-300 group-hover:opacity-100 group-hover:translate-y-0">
-                                    <span>Launch</span>
-                                    <ArrowRight className="h-4 w-4" />
-                                 </div>
-                              </div>
-                           </div>
-
-                           <Link
-                              href={`/chat?mode=learn&subject=${encodeURIComponent(track.subject)}`}
-                              className="absolute inset-0 z-20"
-                           >
-                              <span className="sr-only">Start {track.subject}</span>
-                           </Link>
-                        </motion.div>
-                     ))}
-                  </div>
                </div>
             </section>
 
