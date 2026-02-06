@@ -84,18 +84,19 @@ const CopyButton = ({ text }: { text: string }) => {
 export function ApiKeyCheck({ children }: ApiKeyCheckProps) {
   const isApiKeyMissing = !process.env.NEXT_PUBLIC_TAMBO_API_KEY;
 
-  return (
-    <div className="flex items-start gap-4">
-      <div className="flex-grow">
-        <div className="flex items-center gap-1">
-          <div className="min-w-6">{isApiKeyMissing ? "❌" : "✅"}</div>
-          <p>
-            {isApiKeyMissing ? "Tambo not initialized" : "Tambo initialized"}
-          </p>
+  if (isApiKeyMissing) {
+    return (
+      <div className="flex items-start gap-4 text-left">
+        <div className="flex-grow">
+          <div className="flex items-center gap-1 mb-2">
+            <div className="min-w-6">❌</div>
+            <p className="font-medium text-red-600">Tambo not initialized</p>
+          </div>
+          <ApiKeyMissingAlert />
         </div>
-        {isApiKeyMissing && <ApiKeyMissingAlert />}
-        {!isApiKeyMissing && children}
       </div>
-    </div>
-  );
+    );
+  }
+
+  return <>{children}</>;
 }
