@@ -32,19 +32,49 @@ function ChatContent() {
   const searchParams = useSearchParams();
   const { profile } = useUserProfile();
   const interactablesSnapshot = useCurrentInteractablesSnapshot();
+  const allowedSubjects = ["Physics", "Math", "Chemistry", "Computer Science"];
+  const subjectParam = searchParams.get("subject");
+  const initialSubject =
+    subjectParam && allowedSubjects.includes(subjectParam)
+      ? subjectParam
+      : undefined;
+  const autoStartSubject = searchParams.get("autostart") === "1";
+  const modeParam = searchParams.get("mode");
+  const modeOverride =
+    modeParam === "exam" || modeParam === "learn" ? modeParam : undefined;
+  const subjectSeed = profile.focusSubject ?? initialSubject;
 
   useEffect(() => {
     const mode = searchParams.get("mode");
     const subject = searchParams.get("subject");
-    if (mode === "exam" || mode === "learn") {
-      saveUserProfile({ learningMode: mode });
-    }
-    if (subject && ["Physics", "Math", "Chemistry", "Computer Science"].includes(subject)) {
-      saveUserProfile({ focusSubject: subject });
-    }
-  }, [searchParams]);
+    const autostart = searchParams.get("autostart");
+    const updates: Partial<ReturnType<typeof loadUserProfile>> = {};
 
-  const learningMode = profile.learningMode ?? "exam";
+    if (mode === "exam" || mode === "learn") {
+      if (mode !== profile.learningMode) updates.learningMode = mode;
+    }
+    if (
+      subject &&
+      ["Physics", "Math", "Chemistry", "Computer Science"].includes(subject)
+    ) {
+      if (subject !== profile.focusSubject) updates.focusSubject = subject;
+      const shouldAutoStart = autostart === "1";
+      if (shouldAutoStart !== profile.autoStartSubject) {
+        updates.autoStartSubject = shouldAutoStart;
+      }
+    }
+
+    if (Object.keys(updates).length > 0) {
+      saveUserProfile(updates);
+    }
+  }, [
+    searchParams,
+    profile.learningMode,
+    profile.focusSubject,
+    profile.autoStartSubject,
+  ]);
+
+  const learningMode = modeOverride ?? profile.learningMode ?? "exam";
   const modeGuide =
     learningMode === "learn"
       ? [
@@ -107,8 +137,12 @@ function ChatContent() {
 
     const welcomeText =
       learningMode === "learn"
-        ? "Welcome! I’m your STEM learning coach. Choose a subject (Physics, Math, Chemistry, or Computer Science) and tell me your learning goal. I can make quizzes, explain formulas, show progress charts, and build a learning roadmap once you share your pace."
-        : "Welcome! I’m your engineering exam coach. Choose a subject (Physics, Math, Chemistry, or Computer Science) and tell me how many days you have before the exam. I can also make a quick quiz, explain formulas, show progress charts, or give real‑world examples.";
+        ? subjectSeed
+          ? `Welcome! I’m your ${subjectSeed} learning coach. Tell me your learning goal and pace, and I’ll build quizzes, formulas, progress charts, and a roadmap.`
+          : "Welcome! I’m your STEM learning coach. Choose a subject (Physics, Math, Chemistry, or Computer Science) and tell me your learning goal. I can make quizzes, explain formulas, show progress charts, and build a learning roadmap once you share your pace."
+        : subjectSeed
+          ? `Welcome! I’m your ${subjectSeed} exam coach. Tell me how many days you have before the exam and I’ll build a plan, quizzes, and progress tracking.`
+          : "Welcome! I’m your engineering exam coach. Choose a subject (Physics, Math, Chemistry, or Computer Science) and tell me how many days you have before the exam. I can also make a quick quiz, explain formulas, show progress charts, or give real‑world examples.";
 
     return [
       {
@@ -123,6 +157,10 @@ function ChatContent() {
               "If context includes a student name, greet them by name.",
               "If the user asks to change their name, tell them to use the Edit button in the identity bar.",
               "If context attachments are provided, incorporate them in the response.",
+              "If focusSubject is provided in context, treat it as locked and do not ask to switch subjects unless the user asks.",
+              "If focusSubject is set, do not mention or list other subjects; keep all components scoped to that subject.",
+              "If learningMode is learn, never ask about exam timelines or deadlines.",
+              "If learningMode is exam and examDaysLeft is missing, ask for days until exam before creating a StudyPlan.",
               "Prefer using the registered components to answer:",
               "QuizCard for practice, FormulaCard for formulas, StudyPlan for schedules,",
               "QuizReview for answer explanations and post-quiz review.",
@@ -139,6 +177,7 @@ function ChatContent() {
               "Form for intake or diagnostic questionnaires to collect study preferences.",
               "Graph is a pre-built Tambo component for generic charts (bar/line/area/pie/donut/scatter/histogram/heatmap). Use it when a user asks for a generic chart or trend.",
               "Use tools when needed: buildStudyPlan, scoreQuiz, buildProgressSignal, getStemTopicPack.",
+              "When calling getStemTopicPack, always use focusSubject if provided.",
               "If asked for a completion chart and no data is given, render CompletionChart with demo data.",
               "Hard rules (must follow):",
               "• If user asks for quiz or practice: ALWAYS render QuizCard (3–5 questions) with explanations.",
@@ -177,7 +216,7 @@ function ChatContent() {
         ],
       },
     ];
-  }, [learningMode, modeGuide]);
+  }, [learningMode, modeGuide, subjectSeed]);
 
   return (
     <TamboProvider
@@ -192,7 +231,12 @@ function ChatContent() {
       key={learningMode}
     >
       <div className="h-screen">
-        <MessageThreadFull className="max-w-4xl mx-auto" />
+        <MessageThreadFull
+          className="max-w-4xl mx-auto"
+          initialSubject={initialSubject}
+          autoStartSubject={autoStartSubject}
+          modeOverride={modeOverride}
+        />
       </div>
     </TamboProvider>
   );

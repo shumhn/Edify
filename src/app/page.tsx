@@ -60,7 +60,7 @@ const tracks = [
    },
    {
       title: "Mathematics",
-      subject: "Mathematics",
+      subject: "Math",
       description: "Multivariable Calculus, Linear Algebra, & Statistics",
       gradient: "from-orange-500 to-amber-500",
       stats: { modules: "24", level: "Core", time: "24h" }
@@ -382,7 +382,7 @@ export default function Home() {
                            </div>
 
                            <Link
-                              href={`/chat?mode=learn&subject=${encodeURIComponent(track.subject)}`}
+                              href={`/chat?mode=learn&subject=${encodeURIComponent(track.subject)}&autostart=1`}
                               className="absolute inset-0 z-20"
                            >
                               <span className="sr-only">Start {track.subject}</span>
