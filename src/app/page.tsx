@@ -21,27 +21,27 @@ const stagger = {
 
 const features = [
    {
-      title: "Diagnostic Maps",
-      description: "Spot weak areas quickly with interactive topic maps used by 10k+ students.",
+      title: "Cognitive Architectures",
+      description: "Dynamic knowledge graphs that map concept dependencies and structural intersections in real-time.",
       icon: <BrainCircuit className="h-6 w-6 text-white" />,
       color: "bg-blue-500"
    },
    {
-      title: "Adaptive Loops",
-      description: "Short lessons flow into quizzes, mistake review, and mastery tracking.",
+      title: "Recursive Mastery",
+      description: "Self-correcting feedback loops that bank every error to recalibrate your entire learning trajectory.",
       icon: <Zap className="h-6 w-6 text-white" />,
       color: "bg-orange-500"
    },
    {
-      title: "Smart Roadmaps",
-      description: "Create learning paths or exam plans based on pace, level, and goals.",
-      icon: <Layers className="h-6 w-6 text-white" />,
+      title: "Active Context Elicitation",
+      description: "Proactive behavioral interviews that extract student intent, skill level, and cognitive pace.",
+      icon: <Layout className="h-6 w-6 text-white" />,
       color: "bg-purple-500"
    },
    {
-      title: "Real Progress",
-      description: "Dashboards, charts, and readiness scores keep learning measurable.",
-      icon: <BarChart3 className="h-6 w-6 text-white" />,
+      title: "Multi-Modal Intel Layer",
+      description: "Unified intelligence via FormulaCards, ConceptExplainers, and RoadmapTimelines for 360° mastery.",
+      icon: <Layers className="h-6 w-6 text-white" />,
       color: "bg-emerald-500"
    },
 ];
