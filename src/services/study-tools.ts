@@ -61,7 +61,7 @@ export async function buildStudyPlan(
   input: StudyPlanInput,
 ): Promise<StudyPlanOutput> {
   const { subject, focusTopics, days, dailyMinutes } = input;
-  const topics = focusTopics.length > 0 ? focusTopics : [subject];
+  const topics = (focusTopics?.length ?? 0) > 0 ? focusTopics : [subject];
 
   const plan: StudyPlanDay[] = Array.from({ length: days }, (_, index) => {
     const topic = topics[index % topics.length];
