@@ -292,8 +292,8 @@ export function SmartSuggestions({
         ? lastUser.content
         : Array.isArray(lastUser.content)
           ? lastUser.content
-              .map((item: any) => (item?.type === "text" ? item.text : ""))
-              .join(" ")
+            .map((item: any) => (item?.type === "text" ? item.text : ""))
+            .join(" ")
           : "";
 
     const key = detectFocusKey(contentText);
@@ -354,24 +354,14 @@ export function SmartSuggestions({
       </div>
       <div className="mt-2 flex flex-wrap gap-2">
         {visible.map((item) => (
-          <div key={item.id} className="flex items-center">
-            <button
-              type="button"
-              onClick={() => handleClick(item)}
-              disabled={!isIdle}
-              className="px-3 py-1.5 rounded-full text-xs font-medium transition-colors shadow-sm border border-slate-200 text-slate-700 hover:border-slate-300 hover:text-slate-900 disabled:opacity-60"
-            >
-              {item.title}
-            </button>
-            <button
-              type="button"
-              onClick={() => handlePrefill(item)}
-              className="ml-1 rounded-full border border-slate-200 px-2 py-1 text-[10px] font-semibold text-slate-400 hover:border-slate-300 hover:text-slate-700"
-              title="Prefill input"
-            >
-              Edit
-            </button>
-          </div>
+          <button
+            key={item.id}
+            type="button"
+            onClick={() => handlePrefill(item)}
+            className="px-3 py-1.5 rounded-full text-xs font-medium transition-colors shadow-sm border border-slate-200 text-slate-700 hover:border-slate-300 hover:text-slate-900"
+          >
+            {item.title}
+          </button>
         ))}
         {allSuggestions.length > maxVisible && (
           <button
