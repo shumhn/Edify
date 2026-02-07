@@ -139,7 +139,7 @@ export function QuizCard({ title, topic, questions = [] }: QuizCardProps) {
             : [];
 
           return (
-            <div key={question.id} className="space-y-3">
+            <div key={`${question.id}-${index}`} className="space-y-3">
               <div className="flex items-start gap-3">
                 <div className="mt-1 flex h-6 w-6 items-center justify-center rounded-full bg-emerald-100 text-sm font-semibold text-emerald-700">
                   {index + 1}
@@ -176,8 +176,8 @@ export function QuizCard({ title, topic, questions = [] }: QuizCardProps) {
                         }))
                       }
                       className={`rounded-xl border px-4 py-3 text-left text-sm transition ${isSelected
-                          ? "border-emerald-400 bg-emerald-50"
-                          : "border-gray-200 bg-white hover:border-emerald-300"
+                        ? "border-emerald-400 bg-emerald-50"
+                        : "border-gray-200 bg-white hover:border-emerald-300"
                         } ${showCorrect
                           ? "border-emerald-500 bg-emerald-100"
                           : ""
