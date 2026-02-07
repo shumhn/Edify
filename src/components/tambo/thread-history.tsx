@@ -15,6 +15,7 @@ import {
   PlusIcon,
   SearchIcon,
   Sparkles,
+  Trash2,
 } from "lucide-react";
 import React, { useMemo } from "react";
 
@@ -37,6 +38,8 @@ interface ThreadHistoryContextValue {
   position?: "left" | "right";
   updateThreadName: (newName: string, threadId?: string) => Promise<void>;
   generateThreadName: (threadId: string) => Promise<TamboThread>;
+  hiddenThreadIds: Set<string>;
+  hideThread: (threadId: string) => void;
 }
 
 const ThreadHistoryContext =
@@ -77,6 +80,7 @@ const ThreadHistory = React.forwardRef<HTMLDivElement, ThreadHistoryProps>(
     const [searchQuery, setSearchQuery] = React.useState("");
     const [isCollapsed, setIsCollapsed] = React.useState(defaultCollapsed);
     const [shouldFocusSearch, setShouldFocusSearch] = React.useState(false);
+    const [hiddenThreadIds, setHiddenThreadIds] = React.useState<Set<string>>(new Set());
 
     const { data: threads, isLoading, error, refetch } = useTamboThreadList();
 
@@ -104,6 +108,10 @@ const ThreadHistory = React.forwardRef<HTMLDivElement, ThreadHistoryProps>(
       }
     }, [isCollapsed, shouldFocusSearch]);
 
+    const hideThread = React.useCallback((threadId: string) => {
+      setHiddenThreadIds((prev) => new Set([...prev, threadId]));
+    }, []);
+
     const contextValue = React.useMemo(
       () => ({
         threads,
@@ -121,6 +129,8 @@ const ThreadHistory = React.forwardRef<HTMLDivElement, ThreadHistoryProps>(
         position,
         updateThreadName,
         generateThreadName,
+        hiddenThreadIds,
+        hideThread,
       }),
       [
         threads,
@@ -136,6 +146,8 @@ const ThreadHistory = React.forwardRef<HTMLDivElement, ThreadHistoryProps>(
         position,
         updateThreadName,
         generateThreadName,
+        hiddenThreadIds,
+        hideThread,
       ],
     );
 
@@ -370,6 +382,8 @@ const ThreadHistoryList = React.forwardRef<
     updateThreadName,
     generateThreadName,
     refetch,
+    hiddenThreadIds,
+    hideThread,
   } = useThreadHistoryContext();
 
   const [editingThread, setEditingThread] = React.useState<TamboThread | null>(
@@ -421,12 +435,15 @@ const ThreadHistoryList = React.forwardRef<
 
     const query = searchQuery.toLowerCase();
     return threads.items.filter((thread: TamboThread) => {
+      // Skip hidden threads
+      if (hiddenThreadIds.has(thread.id)) return false;
+
       const nameMatches = thread.name?.toLowerCase().includes(query) ?? false;
       const idMatches = thread.id.toLowerCase().includes(query);
 
       return idMatches ? true : nameMatches;
     });
-  }, [isCollapsed, threads, searchQuery]);
+  }, [isCollapsed, threads, searchQuery, hiddenThreadIds]);
 
   const handleSwitchThread = async (threadId: string, e?: React.MouseEvent) => {
     if (e) e.stopPropagation();
@@ -562,6 +579,7 @@ const ThreadHistoryList = React.forwardRef<
               thread={thread}
               onRename={handleRename}
               onGenerateName={handleGenerateName}
+              onHide={hideThread}
             />
           </div>
         ))}
@@ -594,10 +612,12 @@ const ThreadOptionsDropdown = ({
   thread,
   onRename,
   onGenerateName,
+  onHide,
 }: {
   thread: TamboThread;
   onRename: (thread: TamboThread) => void;
   onGenerateName: (thread: TamboThread) => void;
+  onHide: (threadId: string) => void;
 }) => {
   return (
     <DropdownMenu.Root>
@@ -634,6 +654,16 @@ const ThreadOptionsDropdown = ({
           >
             <Sparkles className="h-3 w-3" />
             Generate Name
+          </DropdownMenu.Item>
+          <DropdownMenu.Item
+            className="flex items-center gap-2 px-2 py-1.5 text-red-600 hover:bg-red-50 rounded-sm cursor-pointer outline-none transition-colors"
+            onClick={(e) => {
+              e.stopPropagation();
+              onHide(thread.id);
+            }}
+          >
+            <Trash2 className="h-3 w-3" />
+            Delete
           </DropdownMenu.Item>
         </DropdownMenu.Content>
       </DropdownMenu.Portal>
