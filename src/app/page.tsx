@@ -186,11 +186,30 @@ export default function Home() {
          {/* Glass Navigation */}
          <nav className="fixed left-0 right-0 top-0 z-50 border-b border-white/20 bg-white/60 backdrop-blur-xl">
             <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-6">
-               <div className="flex items-center gap-2">
-                  <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-gradient-to-br from-orange-500 to-red-600 text-white font-bold shadow-lg shadow-orange-500/20">
-                     AS
+               <div className="flex items-center gap-3">
+                  <div className="relative h-12 w-12">
+                     <svg viewBox="0 0 64 64" className="h-12 w-12 drop-shadow-lg" aria-hidden="true">
+                        <defs>
+                           <linearGradient id="edify-mark" x1="0" y1="0" x2="1" y2="1">
+                              <stop offset="0" stopColor="#EF4444" />
+                              <stop offset="1" stopColor="#F97316" />
+                           </linearGradient>
+                        </defs>
+                        <rect x="4" y="4" width="56" height="56" rx="16" fill="url(#edify-mark)" />
+                        <path
+                           d="M18 22c0-2.2 1.8-4 4-4h10c3.3 0 6 2.7 6 6v20c-1.9-1.2-4.1-2-6-2H22c-2.2 0-4-1.8-4-4V22Z"
+                           fill="#fff"
+                           fillOpacity="0.95"
+                        />
+                        <path
+                           d="M46 22c0-2.2-1.8-4-4-4H32c-3.3 0-6 2.7-6 6v20c1.9-1.2 4.1-2 6-2h10c2.2 0 4-1.8 4-4V22Z"
+                           fill="#fff"
+                           fillOpacity="0.9"
+                        />
+                        <path d="M44 12l2 5 5 2-5 2-2 5-2-5-5-2 5-2 2-5Z" fill="#FDE68A" />
+                     </svg>
                   </div>
-                  <span className="text-lg font-bold tracking-tight">AdaptiveStudy</span>
+                  <span className="text-xl font-extrabold tracking-tight text-slate-900">Edify</span>
                </div>
                <div className="flex items-center gap-4">
                   <div className="hidden sm:flex items-center gap-2 px-3 py-1.5 rounded-xl bg-slate-900/[0.03] border border-slate-900/5 transition-colors hover:bg-slate-900/[0.05]">
@@ -198,11 +217,11 @@ export default function Home() {
                      <span className="text-[10px] font-black text-slate-900 uppercase tracking-widest">Tambo AI</span>
                   </div>
                   <Link
-                     href="/chat?mode=learn"
+                     href="/chat?mode=learn&clearSubject=1"
                      className="group relative overflow-hidden rounded-full bg-slate-900 px-6 py-2 text-sm font-semibold text-white transition-all hover:scale-105 hover:shadow-xl hover:shadow-slate-900/20"
                   >
                      <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent translate-x-[-200%] transition-transform duration-700 group-hover:translate-x-[200%]" />
-                     <span className="relative">Start Audit</span>
+                     <span className="relative">Start Learning</span>
                   </Link>
                </div>
             </div>
@@ -549,11 +568,30 @@ export default function Home() {
                <div className="mx-auto max-w-7xl px-6 lg:px-8">
                   <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-12 pb-16">
                      <div className="col-span-2 lg:col-span-2">
-                        <div className="flex items-center gap-2 mb-6">
-                           <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-gradient-to-br from-orange-500 to-red-600 text-white font-bold text-sm">
-                              AS
+                        <div className="flex items-center gap-3 mb-6">
+                           <div className="relative h-10 w-10">
+                              <svg viewBox="0 0 64 64" className="h-10 w-10 drop-shadow-md" aria-hidden="true">
+                                 <defs>
+                                    <linearGradient id="edify-mark-footer" x1="0" y1="0" x2="1" y2="1">
+                                       <stop offset="0" stopColor="#EF4444" />
+                                       <stop offset="1" stopColor="#F97316" />
+                                    </linearGradient>
+                                 </defs>
+                                 <rect x="6" y="6" width="52" height="52" rx="14" fill="url(#edify-mark-footer)" />
+                                 <path
+                                    d="M20 24c0-2 1.6-3.6 3.6-3.6h9.4c3 0 5.4 2.4 5.4 5.4v18c-1.7-1-3.7-1.7-5.4-1.7H23.6c-2 0-3.6-1.6-3.6-3.6V24Z"
+                                    fill="#fff"
+                                    fillOpacity="0.95"
+                                 />
+                                 <path
+                                    d="M44 24c0-2-1.6-3.6-3.6-3.6H31c-3 0-5.4 2.4-5.4 5.4v18c1.7-1 3.7-1.7 5.4-1.7h9.4c2 0 3.6-1.6 3.6-3.6V24Z"
+                                    fill="#fff"
+                                    fillOpacity="0.9"
+                                 />
+                                 <path d="M44 14l1.8 4.2 4.2 1.8-4.2 1.8-1.8 4.2-1.8-4.2-4.2-1.8 4.2-1.8 1.8-4.2Z" fill="#FDE68A" />
+                              </svg>
                            </div>
-                           <span className="text-lg font-bold tracking-tight">AdaptiveStudy</span>
+                           <span className="text-lg font-extrabold tracking-tight text-slate-900">Edify</span>
                         </div>
                         <p className="text-slate-500 text-sm max-w-xs leading-relaxed">
                            The Generative UI engine for high-velocity STEM mastery. Powered by the next generation of Tambo AI infrastructure.
@@ -587,7 +625,7 @@ export default function Home() {
                   </div>
                   <div className="pt-8 border-t border-slate-100 flex flex-col md:flex-row justify-between items-center gap-6">
                      <div className="flex flex-col items-center md:items-start gap-2">
-                        <p className="text-xs text-slate-400">&copy; 2026 Adaptive Study Coach. All rights reserved.</p>
+                        <p className="text-xs text-slate-400">&copy; 2026 Edify. All rights reserved.</p>
                         <div className="flex items-center gap-2 px-2 py-1 rounded-lg bg-slate-50 border border-slate-100">
                            <span className="text-[9px] font-bold text-slate-400 uppercase tracking-widest">Built with</span>
                            <span className="text-[9px] font-black text-slate-900 uppercase tracking-widest">Tambo Generative Engine</span>

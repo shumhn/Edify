@@ -1,6 +1,14 @@
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 
+export const metadata = {
+  title: "Edify",
+  description: "The UI that studies with you. Adaptive STEM learning with generative UI.",
+  icons: {
+    icon: "/icon.svg",
+  },
+};
+
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
