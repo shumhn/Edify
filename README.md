@@ -1,166 +1,128 @@
-# Edify — Generative UI Ed - Tech Platform
+# Edify — The UI that studies with you 🚀
 
-Edify is a **generative UI** study coach for learners across all subjects. Built on **Tambo’s React SDK**, Edify turns user intent into rich, interactive components — plans, quizzes, topic maps, dashboards, and charts — instead of long, static text.
+Edify is a **premium generative UI EdTech platform** designed for the modern learner. Built on **Tambo’s React SDK**, Edify transforms static study materials into a dynamic, interactive experience. Instead of scrolling through walls of text, Edify renders custom plans, adaptive quizzes, topic maps, and real-time dashboards tailored to your specific needs.
 
-**Primary goal:** make learning feel tailored in seconds, not sessions.
-
----
-
-## Product Highlights
-- **Generative UI first:** the assistant answers by rendering components, not paragraphs.
-- **Dual modes:** *Learn & Practice* and *Exam Prep* flows with different prompts and pacing.
-- **Subject tracks:** Physics, Math, Chemistry, and Computer Science each follow tailored paths.
-- **Diagnostics built‑in:** pick weak topics from a visual map and start immediately.
-- **Realtime progress:** dashboards, readiness scores, and mastery visuals update from interactions.
+**Primary Goal:** Make learning feel personalized in seconds, not sessions.
 
 ---
 
-## Demo Video
-Watch Edify in action: [YouTube Video](https://www.youtube.com/watch?v=xtpF_Tu5I-w&t=3s)
+## ✨ Product Highlights
+- **Generative UI First:** Responses are built from interactive components, not just text.
+- **Dual Learning Paths:**
+  - **Learn & Practice:** Focus on concept mastery and foundational knowledge.
+  - **Exam Prep:** High-intensity pacing with countdowns and readiness tracking.
+- **Subject-Specific Tracks:** Deep integration for Physics, Math, Chemistry, and Computer Science.
+- **Visual Diagnostics:** Identify and attack weak topics using interactive maps and radar charts.
+- **Real-time Feedback:** Your progress, streaks, and mastery update instantly as you interact.
 
 ---
 
-## Core Features
-- **Topic diagnostics** with interactive selection
-- **Adaptive study plans** (day‑by‑day)
-- **Interactive quizzes** with review and explanations
-- **Formula + concept cards** for quick revision
-- **Roadmaps and mastery views** for long‑term progress
-- **Real‑world application cards** to ground learning
-- **Charts** (bar/line/area/pie/donut/scatter/heatmap)
-- **Context notes + intake forms** to steer the next response
-- **Voice input** for hands‑free prompts
+## 📺 Demo Video
+Experience Edify in action: [Watch on YouTube](https://www.youtube.com/watch?v=xtpF_Tu5I-w&t=3s)
 
 ---
 
-## Generative UI Components
-- `StudyPlan`
-- `QuizCard` and `QuizReview`
-- `TopicListCard`
-- `FormulaCard` and `LessonCard`
-- `RoadmapTimeline`
-- `ProgressDashboard`
-- `CompletionChart`
-- `ReadinessScore` and `GaugeCard`
-- `WeakTopicRadar`
-- `ApplicationCards`
-- `MasteryMatrix`
-- `Graph`
-- `Form`
+## 🛠️ Core Features
+- **Adaptive Study Plans:** Day-by-day schedules that adjust to your pace.
+- **Interactive Quizzes:** Practice with instant feedback, explanations, and review modes.
+- **Topic Diagnostics:** Smart selection of topics based on your level.
+- **Formula & Lesson Cards:** Quick revision tools with worked examples.
+- **Roadmaps & Mastery View:** Visualize your long-term learning journey.
+- **Mistake Bank:** Track and retry questions you've missed to ensure mastery.
+- **Voice Intelligence:** Hands-free prompts for a seamless study flow.
+- **Data Visualization:** Rich charts (Bar, Line, Area, Pie, Radar, Heatmap) for progress tracking.
 
 ---
 
-## How It Works
-1. **Intent captured** via chat or CTA.
-2. **Tambo tools** return structured data (plans, topics, scores, charts).
-3. **Registered components** render the UI the user needs — automatically.
-4. **Interactables** update state based on user actions (quizzes, plans, dashboards).
+## 🧩 Generative UI Components
+Edify uses a library of custom Tambo components to render the perfect UI for every interaction:
+
+- `StudyPlan` & `RoadmapTimeline`
+- `QuizCard` & `QuizReview`
+- `ConceptExplainer` & `LessonCard`
+- `FormulaCard` & `MistakeBank`
+- `ProgressDashboard` & `ReadinessScore`
+- `WeakTopicRadar` & `MasteryMatrix`
+- `CompletionChart` & `GaugeCard`
+- `ApplicationCards` & `CoachInsight`
+- `Graph` & `Form`
 
 ---
 
-## Tech Stack
-- **Next.js 16 + React 19 + TypeScript**
-- **Tambo React SDK** for generative UI + tools
-- **Tailwind CSS** for styling
-- **Recharts** for data visualization
+## 🚀 How It Works
+1. **Intent Capture:** Share your goal via chat, voice, or interactive CTA.
+2. **AI Reasoning:** The Edify agent processes your intent and determines the best tools to use.
+3. **Structured Data:** Tambo tools (e.g., `buildStudyPlan`, `scoreQuiz`) return precise data.
+4. **Dynamic Rendering:** Edify automatically selects and renders the matching component.
+5. **Stateful Interaction:** Components update in real-time based on your actions, saving progress to your profile.
 
 ---
 
-## Project Structure
-```
+## 💻 Tech Stack
+- **Framework:** Next.js 16 (App Router)
+- **UI Architecture:** React 19 + TypeScript
+- **Generative UI:** [Tambo React SDK](https://tambo.co/docs)
+- **Styling:** Tailwind CSS 4
+- **Animations:** Framer Motion
+- **Charts:** Recharts
+
+---
+
+## 📁 Project Structure
+```text
 src/
-  app/          # Next.js routes (landing, chat)
-  components/   # UI and generative components
-  hooks/        # UI state and Tambo helpers
-  lib/          # utilities and helpers
-  services/     # Tambo tools and data adapters
+  ├── app/          # Next.js routes and layouts
+  ├── components/   # UI and Generative components
+  ├── hooks/        # Custom hooks for state and profiles
+  ├── lib/          # Tambo configuration and utilities
+  ├── services/     # Tambo tool implementations
+  └── types/        # TypeScript definitions
 ```
 
 ---
 
-## Getting Started
+## 🏁 Getting Started
 
 ### Prerequisites
-- **Node.js 20.9+** (Next.js 16 requirement)
-- **npm**
+- **Node.js 20.9+**
+- **npm** or **pnpm**
 
-### Install
-```bash
-npm install
-```
-
-### Configure
-Create `.env.local`:
-```
-NEXT_PUBLIC_TAMBO_API_KEY=your_api_key_here
-```
-
-### Initialize Tambo
-```bash
-npm run init
-```
-
-### Run
-```bash
-npm run dev
-```
-Open `http://localhost:3000`.
+### Quick Start
+1. **Clone & Install:**
+   ```bash
+   npm install
+   ```
+2. **Configure:** Create a `.env.local` file:
+   ```env
+   NEXT_PUBLIC_TAMBO_API_KEY=your_api_key_here
+   ```
+3. **Initialize:**
+   ```bash
+   npm run init
+   ```
+4. **Dev Mode:**
+   ```bash
+   npm run dev
+   ```
+   Visit `http://localhost:3000` to start studying.
 
 ---
 
-## Scripts
-- `npm run dev` — start local dev server
-- `npm run build` — production build
-- `npm run start` — run production server
-- `npm run lint` — lint checks
-- `npm run lint:fix` — auto‑fix lint issues
-- `npm run init` — Tambo init
+## 📝 Demo Prompts
+- *"Create a 10-day intensive exam prep for Calculus."*
+- *"Quiz me on organic chemistry and explain where I go wrong."*
+- *"Show me my mastery radar for Computer Science topics."*
+- *"Explain the concept of quantum entanglement with a real-world example."*
 
 ---
 
-## Demo Prompts (Fast Walkthrough)
-- “Build a 14‑day exam prep plan for Physics and Math.”
-- “Quiz me on electromagnetism and explain mistakes.”
-- “Show a mastery radar for Mechanics, Waves, E&M.”
-- “Create a progress dashboard: score 62%, streak 4, 210 minutes this week.”
-- “Generate a pie chart of study time split: 40/30/20/10.”
+## 🛡️ Security & Deployment
+- **Deployment:** Optimized for **Vercel** with full support for Edge functions.
+- **Privacy:** User profiles are stored locally; API keys should always be kept in `.env.local`.
 
 ---
 
-## Deployment
-Edify is a standard Next.js app and can be deployed on **Vercel**, **Netlify**, or any Node server.
+## 🌟 Credits
+Designed for **The UI Strikes Back Hackathon** using the **Tambo SDK**.
 
-```bash
-npm run build
-npm run start
-```
-
----
-
-## Security & Privacy
-- Store API keys in `.env.local` and **never commit** them.
-- Client‑side keys are acceptable for demos; for production, consider proxying requests through a secure backend.
-
----
-
-## Troubleshooting
-- **Node version errors:** upgrade to Node 20.9+.
-- **No UI renders:** verify `NEXT_PUBLIC_TAMBO_API_KEY` is set.
-- **Charts or components missing:** ensure tools return structured data and the component is registered.
-
----
-
-## Roadmap
-- Exam‑specific topic packs
-- Personalized pacing profiles
-- Exportable progress reports
-
----
-
-## Credits
-- **Tambo SDK** — generative UI framework
-- **The UI Strikes Back Hackathon** — inspiration and demo target
-
----
-
-**Edify** — The UI that studies with you.
+**Edify** — *The UI that studies with you.*
