@@ -15,6 +15,11 @@ Edify is a **generative UI** study coach for learners across all subjects. Built
 
 ---
 
+## Demo Video
+Watch Edify in action: [YouTube Video](https://www.youtube.com/watch?v=xtpF_Tu5I-w&t=3s)
+
+---
+
 ## Core Features
 - **Topic diagnostics** with interactive selection
 - **Adaptive study plans** (day‑by‑day)
