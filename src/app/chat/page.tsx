@@ -97,7 +97,7 @@ function ChatContent() {
     studyCoachProfile: () => {
       const profile = loadUserProfile();
       return {
-        appName: "Adaptive Study Coach",
+        appName: "Edify",
         studentName: profile.name,
         focusSubjects: ["Physics", "Math", "Chemistry", "Computer Science"],
         targetLevel: profile.gradeLevel ?? "Engineering-track +2 (MPC/CS)",
@@ -156,7 +156,7 @@ function ChatContent() {
           {
             type: "text" as "text",
             text: [
-              "You are Adaptive Study Coach for engineering-track STEM exams (+2 MPC/CS).",
+              "You are Edify, a STEM learning coach for engineering-track exams (+2 MPC/CS).",
               "Sound professional, friendly, and concise.",
               modeGuide,
               "If context includes a student name, greet them by name.",

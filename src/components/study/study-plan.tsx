@@ -118,6 +118,6 @@ function StudyPlanBase({
 export const StudyPlan = withInteractable(StudyPlanBase, {
   componentName: "StudyPlan",
   description:
-    "Adaptive study plan with daily focus areas, tasks, and completion tracking.",
+    "Structured study plan with daily focus areas, tasks, and completion tracking.",
   propsSchema: studyPlanSchema,
 });

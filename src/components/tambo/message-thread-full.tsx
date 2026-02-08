@@ -69,6 +69,19 @@ export const MessageThreadFull = React.forwardRef<
   const hasUserMessage = thread?.messages?.some(
     (message) => message.role === "user",
   );
+  const hideIdentityBar = React.useMemo(() => {
+    const messages = thread?.messages ?? [];
+    return messages.some((message) => {
+      if (message.role !== "assistant" || !message.renderedComponent) return false;
+      if (!React.isValidElement(message.renderedComponent)) return false;
+      const type = message.renderedComponent.type as
+        | string
+        | { displayName?: string; name?: string };
+      const name =
+        typeof type === "string" ? type : type?.displayName ?? type?.name;
+      return !!name && /chart|graph/i.test(name);
+    });
+  }, [thread?.messages]);
 
   const threadHistorySidebar = (
     <ThreadHistory position={historyPosition}>
@@ -98,9 +111,11 @@ export const MessageThreadFull = React.forwardRef<
         className={className}
         {...props}
       >
-        <div className="px-4 pt-4">
-          <StudentIdentityBar />
-        </div>
+        {!hideIdentityBar && (
+          <div className="px-4 pt-4">
+            <StudentIdentityBar />
+          </div>
+        )}
         <ScrollableMessageContainer className="p-4">
           <ThreadContent variant={variant}>
             {!hasUserMessage && (
