@@ -1,4 +1,4 @@
-# Edify — The UI that studies with you 🚀
+# Edify — The UI that studies with you
 
 Edify is a **premium generative UI EdTech platform** designed for the modern learner. Built on **Tambo’s React SDK**, Edify transforms static study materials into a dynamic, interactive experience. Instead of scrolling through walls of text, Edify renders custom plans, adaptive quizzes, topic maps, and real-time dashboards tailored to your specific needs.
 
@@ -6,7 +6,7 @@ Edify is a **premium generative UI EdTech platform** designed for the modern lea
 
 ---
 
-## ✨ Product Highlights
+## Product Highlights
 - **Generative UI First:** Responses are built from interactive components, not just text.
 - **Dual Learning Paths:**
   - **Learn & Practice:** Focus on concept mastery and foundational knowledge.
@@ -17,12 +17,12 @@ Edify is a **premium generative UI EdTech platform** designed for the modern lea
 
 ---
 
-## 📺 Demo Video
+## Demo Video
 Experience Edify in action: [Watch on YouTube](https://www.youtube.com/watch?v=xtpF_Tu5I-w&t=3s)
 
 ---
 
-## 🛠️ Core Features
+## Core Features
 - **Adaptive Study Plans:** Day-by-day schedules that adjust to your pace.
 - **Interactive Quizzes:** Practice with instant feedback, explanations, and review modes.
 - **Topic Diagnostics:** Smart selection of topics based on your level.
@@ -34,7 +34,7 @@ Experience Edify in action: [Watch on YouTube](https://www.youtube.com/watch?v=x
 
 ---
 
-## 🧩 Generative UI Components
+## Generative UI Components
 Edify uses a library of custom Tambo components to render the perfect UI for every interaction:
 
 - `StudyPlan` & `RoadmapTimeline`
@@ -49,7 +49,7 @@ Edify uses a library of custom Tambo components to render the perfect UI for eve
 
 ---
 
-## 🚀 How It Works
+## How It Works
 1. **Intent Capture:** Share your goal via chat, voice, or interactive CTA.
 2. **AI Reasoning:** The Edify agent processes your intent and determines the best tools to use.
 3. **Structured Data:** Tambo tools (e.g., `buildStudyPlan`, `scoreQuiz`) return precise data.
@@ -58,7 +58,7 @@ Edify uses a library of custom Tambo components to render the perfect UI for eve
 
 ---
 
-## 💻 Tech Stack
+## Tech Stack
 - **Framework:** Next.js 16 (App Router)
 - **UI Architecture:** React 19 + TypeScript
 - **Generative UI:** [Tambo React SDK](https://tambo.co/docs)
@@ -68,7 +68,7 @@ Edify uses a library of custom Tambo components to render the perfect UI for eve
 
 ---
 
-## 📁 Project Structure
+## Project Structure
 ```text
 src/
   ├── app/          # Next.js routes and layouts
@@ -81,7 +81,7 @@ src/
 
 ---
 
-## 🏁 Getting Started
+## Getting Started
 
 ### Prerequisites
 - **Node.js 20.9+**
@@ -108,7 +108,7 @@ src/
 
 ---
 
-## 📝 Demo Prompts
+## Demo Prompts
 - *"Create a 10-day intensive exam prep for Calculus."*
 - *"Quiz me on organic chemistry and explain where I go wrong."*
 - *"Show me my mastery radar for Computer Science topics."*
@@ -116,13 +116,13 @@ src/
 
 ---
 
-## 🛡️ Security & Deployment
+## Security & Deployment
 - **Deployment:** Optimized for **Vercel** with full support for Edge functions.
 - **Privacy:** User profiles are stored locally; API keys should always be kept in `.env.local`.
 
 ---
 
-## 🌟 Credits
+## Credits
 Designed for **The UI Strikes Back Hackathon** using the **Tambo SDK**.
 
 **Edify** — *The UI that studies with you.*
