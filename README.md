@@ -1,4 +1,4 @@
-# Edify — Generative UI Study Coach for All Subjects
+# Edify — Generative UI Ed - Tech Platform
 
 Edify is a **generative UI** study coach for learners across all subjects. Built on **Tambo’s React SDK**, Edify turns user intent into rich, interactive components — plans, quizzes, topic maps, dashboards, and charts — instead of long, static text.
 
