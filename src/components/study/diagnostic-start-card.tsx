@@ -11,7 +11,7 @@ export function DiagnosticStartCard() {
   const { sendThreadMessage, isIdle } = useTamboThread();
   const { profile, updateProfile } = useUserProfile();
   const [mode, setMode] = useState<"exam" | "learn">(
-    profile.learningMode ?? "exam",
+    profile.learningMode ?? "learn",
   );
   const [subject, setSubject] = useState(profile.focusSubject ?? "Physics");
   const [skillLevel, setSkillLevel] = useState<

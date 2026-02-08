@@ -48,10 +48,15 @@ function ChatContent() {
     const mode = searchParams.get("mode");
     const subject = searchParams.get("subject");
     const autostart = searchParams.get("autostart");
+    const clearSubject = searchParams.get("clearSubject");
     const updates: Partial<ReturnType<typeof loadUserProfile>> = {};
 
     if (mode === "exam" || mode === "learn") {
       if (mode !== profile.learningMode) updates.learningMode = mode;
+    }
+    if (clearSubject === "1") {
+      if (profile.focusSubject) updates.focusSubject = undefined;
+      if (profile.autoStartSubject) updates.autoStartSubject = false;
     }
     if (
       subject &&

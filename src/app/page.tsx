@@ -4,6 +4,8 @@ import { ApiKeyCheck } from "@/components/ApiKeyCheck";
 import Link from "next/link";
 import { ArrowRight, BarChart3, BookOpen, BrainCircuit, Layers, Layout, Zap, Sparkles } from "lucide-react";
 import { motion, useScroll, useTransform } from "framer-motion";
+import { useRouter } from "next/navigation";
+import { useState } from "react";
 
 const fadeIn = {
    initial: { opacity: 0, y: 20 },
@@ -26,28 +28,100 @@ const stagger = {
 const features = [
    {
       title: "AI-Generated Roadmaps",
-      description: "Just tell the engine your goal, and it instantly builds a custom path to get you there.",
+      description: "Custom learning paths that adapt to your goals and pace.",
       icon: <Layers className="h-6 w-6 text-white" />,
       color: "bg-blue-500"
    },
    {
-      title: "Instant Practice Quizzes",
-      description: "Get practice questions generated on the fly, focusing specifically on what you find hardest.",
+      title: "Adaptive Practice Quizzes",
+      description: "Question sets that focus on your weakest concepts.",
       icon: <Zap className="h-6 w-6 text-white" />,
       color: "bg-orange-500"
    },
    {
-      title: "Visual Knowledge Maps",
-      description: "See your subjects as connected visual maps instead of just a boring list of chapters.",
+      title: "Topic Diagnostics",
+      description: "Pick weak areas from an interactive topic map and start fast.",
       icon: <BrainCircuit className="h-6 w-6 text-white" />,
       color: "bg-purple-500"
    },
    {
       title: "Live Mastery Tracking",
-      description: "The engine watches your progress and automatically adjusts your schedule in real-time.",
+      description: "Dashboards, completion charts, and readiness scoring in one view.",
       icon: <BarChart3 className="h-6 w-6 text-white" />,
       color: "bg-emerald-500"
    },
+   {
+      title: "Formula + Concept Cards",
+      description: "Short lessons, formulas, and concept explainers for clarity.",
+      icon: <BookOpen className="h-6 w-6 text-white" />,
+      color: "bg-slate-900"
+   },
+   {
+      title: "Mistake Review Loop",
+      description: "Quiz review, mistake bank, and targeted retries.",
+      icon: <Layout className="h-6 w-6 text-white" />,
+      color: "bg-indigo-500"
+   },
+   {
+      title: "Real-World Applications",
+      description: "Application cards that show why the concept matters.",
+      icon: <Sparkles className="h-6 w-6 text-white" />,
+      color: "bg-pink-500"
+   },
+];
+
+const featureIndex = [
+   "Learn & practice mode",
+   "Exam prep mode",
+   "Subject tracks (Physics/Math/Chem/CS)",
+   "Skill level targeting",
+   "Topic diagnostics",
+   "Topic map",
+   "Lesson cards",
+   "Concept explainers",
+   "Formula cards",
+   "Adaptive quizzes",
+   "Quiz review",
+   "Study plans",
+   "Roadmaps",
+   "Progress dashboard",
+   "Completion chart",
+   "Readiness score",
+   "Weak-topic radar",
+   "Mastery matrix",
+   "Mistake bank",
+   "Coach insights",
+   "Real-world applications",
+   "Charts (bar/line/area/pie/donut/scatter/histogram/heatmap)",
+   "Intake forms",
+   "Context notes"
+];
+
+const coreSystemFeatures = [
+   {
+      title: "Dual Learning Modes",
+      description: "Switch between Learn & Practice or Exam Prep with a single toggle.",
+      icon: <Layout className="h-5 w-5 text-white" />,
+      color: "bg-slate-900"
+   },
+   {
+      title: "Subject Tracks",
+      description: "Physics, Math, Chemistry, and Computer Science tracks with tailored flows.",
+      icon: <BookOpen className="h-5 w-5 text-white" />,
+      color: "bg-blue-600"
+   },
+   {
+      title: "Skill-Level Control",
+      description: "Beginner, Intermediate, Advanced targeting that shapes quizzes and roadmaps.",
+      icon: <BrainCircuit className="h-5 w-5 text-white" />,
+      color: "bg-indigo-500"
+   },
+   {
+      title: "Context Notes",
+      description: "Attach one-time notes (goals, weak topics, deadlines) to steer responses.",
+      icon: <Sparkles className="h-5 w-5 text-white" />,
+      color: "bg-amber-500"
+   }
 ];
 
 const tracks = [
@@ -84,6 +158,19 @@ const tracks = [
 export default function Home() {
    const { scrollYProgress } = useScroll();
    const y = useTransform(scrollYProgress, [0, 1], ["0%", "50%"]);
+   const router = useRouter();
+   const [igniteQuery, setIgniteQuery] = useState("");
+
+   const handleIgnite = () => {
+      const params = new URLSearchParams();
+      params.set("mode", "learn");
+      params.set("clearSubject", "1");
+      const trimmed = igniteQuery.trim();
+      if (trimmed) {
+         params.set("seed", trimmed);
+      }
+      router.push(`/chat?${params.toString()}`);
+   };
 
    return (
       <div className="min-h-screen bg-slate-50 font-sans text-slate-900 selection:bg-orange-200">
@@ -177,26 +264,36 @@ export default function Home() {
                               <input
                                  type="text"
                                  placeholder="e.g. Thermodynamics, Linear Algebra..."
+                                 value={igniteQuery}
+                                 onChange={(event) => setIgniteQuery(event.target.value)}
+                                 onKeyDown={(event) => {
+                                    if (event.key === "Enter") {
+                                       event.preventDefault();
+                                       handleIgnite();
+                                    }
+                                 }}
                                  className="flex-1 bg-transparent py-4 text-lg text-slate-900 placeholder:text-slate-400 focus:outline-none"
                               />
-                              <Link
-                                 href="/chat?mode=learn"
+                              <button
+                                 type="button"
+                                 onClick={handleIgnite}
                                  className="hidden sm:flex items-center gap-2 rounded-xl bg-gradient-to-r from-orange-500 to-red-600 px-8 py-4 text-base font-bold text-white shadow-lg transition-transform hover:scale-[1.02] hover:shadow-orange-500/25 active:scale-[0.98]"
                               >
                                  Ignite
                                  <ArrowRight className="h-5 w-5" />
-                              </Link>
+                              </button>
                            </div>
                         </div>
 
                         {/* Mobile Button */}
                         <div className="mt-4 flex flex-col gap-3 sm:hidden">
-                           <Link
-                              href="/chat?mode=learn"
+                           <button
+                              type="button"
+                              onClick={handleIgnite}
                               className="flex w-full items-center justify-center gap-2 rounded-xl bg-orange-600 px-6 py-4 text-lg font-bold text-white shadow-lg"
                            >
                               Start Learning
-                           </Link>
+                           </button>
                         </div>
                      </motion.div>
                   </ApiKeyCheck>
@@ -313,7 +410,7 @@ export default function Home() {
             </section>
 
             {/* TRACKS / SUBJECTS */}
-            <section className="relative py-24">
+            <section id="tracks" className="relative py-24">
                <div className="absolute inset-0 bg-slate-900 skew-y-3 transform origin-bottom-right translate-y-20 z-0" />
                <div className="relative z-10 mx-auto max-w-7xl px-6 lg:px-8">
                   <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-16 text-white">
@@ -394,7 +491,7 @@ export default function Home() {
             </section>
 
             {/* BENTO GRID FEATURES */}
-            <section className="mx-auto max-w-7xl px-6 lg:px-8 py-20">
+            <section id="features" className="mx-auto max-w-7xl px-6 lg:px-8 py-20">
                <div className="mb-16 text-center">
                   <span className="text-sm font-bold uppercase tracking-widest text-orange-600">The Tambo Advantage</span>
                   <h2 className="mt-2 text-4xl font-bold text-slate-900">Why Choose Us?</h2>
@@ -422,6 +519,31 @@ export default function Home() {
                </div>
             </section>
 
+            {/* CORE MODES & SYSTEM */}
+            <section className="mx-auto max-w-7xl px-6 lg:px-8 pb-20">
+               <div className="mb-12 text-center">
+                  <span className="text-sm font-bold uppercase tracking-widest text-slate-400">Core System</span>
+                  <h3 className="mt-2 text-3xl font-bold text-slate-900">Modes, tracks, and context controls</h3>
+                  <p className="mt-3 text-base text-slate-600">
+                     The controls that make the experience feel tailored, not generic.
+                  </p>
+               </div>
+               <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
+                  {coreSystemFeatures.map((feature) => (
+                     <div
+                        key={feature.title}
+                        className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm transition-all hover:-translate-y-1 hover:shadow-xl"
+                     >
+                        <div className={`mb-4 inline-flex rounded-2xl ${feature.color} p-3 shadow-md`}>
+                           {feature.icon}
+                        </div>
+                        <h4 className="text-lg font-bold text-slate-900">{feature.title}</h4>
+                        <p className="mt-3 text-sm text-slate-600">{feature.description}</p>
+                     </div>
+                  ))}
+               </div>
+            </section>
+
             {/* FOOTER */}
             <footer className="mt-32 border-t border-slate-200 bg-white/80 backdrop-blur-xl pt-24 pb-12">
                <div className="mx-auto max-w-7xl px-6 lg:px-8">
@@ -442,14 +564,14 @@ export default function Home() {
                         <ul className="space-y-4 text-sm text-slate-500">
                            <li><Link href="/chat?mode=learn" className="hover:text-orange-600 transition-colors">Pathways</Link></li>
                            <li><Link href="/chat?mode=exam" className="hover:text-orange-600 transition-colors">Exam Prep</Link></li>
-                           <li><Link href="#" className="hover:text-orange-600 transition-colors">Catalog</Link></li>
-                           <li><Link href="#" className="hover:text-orange-600 transition-colors">Enterprise</Link></li>
+                           <li><Link href="/#tracks" className="hover:text-orange-600 transition-colors">Subject Tracks</Link></li>
+                           <li><Link href="/#features" className="hover:text-orange-600 transition-colors">Core Features</Link></li>
                         </ul>
                      </div>
                      <div>
                         <h4 className="font-bold text-sm text-slate-900 uppercase tracking-widest mb-6">Resources</h4>
                         <ul className="space-y-4 text-sm text-slate-500">
-                           <li><Link href="#" className="hover:text-orange-600 transition-colors">Documentation</Link></li>
+                           <li><Link href="https://docs.tambo.co/" className="hover:text-orange-600 transition-colors">Documentation</Link></li>
                            <li><Link href="#" className="hover:text-orange-600 transition-colors">API Reference</Link></li>
                            <li><Link href="#" className="hover:text-orange-600 transition-colors">Community</Link></li>
                         </ul>
@@ -457,9 +579,9 @@ export default function Home() {
                      <div>
                         <h4 className="font-bold text-sm text-slate-900 uppercase tracking-widest mb-6">Connect</h4>
                         <ul className="space-y-4 text-sm text-slate-500">
-                           <li><Link href="#" className="hover:text-orange-600 transition-colors">Twitter</Link></li>
-                           <li><Link href="#" className="hover:text-orange-600 transition-colors">GitHub</Link></li>
-                           <li><Link href="#" className="hover:text-orange-600 transition-colors">Discord</Link></li>
+                           <li><Link href="https://x.com/tambo_ai" className="hover:text-orange-600 transition-colors">Twitter</Link></li>
+                           <li><Link href="https://github.com/tambo-ai/tambo" className="hover:text-orange-600 transition-colors">GitHub</Link></li>
+                           <li><Link href="https://discord.com/invite/dJNvPEHth6" className="hover:text-orange-600 transition-colors">Discord</Link></li>
                         </ul>
                      </div>
                   </div>

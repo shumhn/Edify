@@ -13,7 +13,7 @@ export type UserProfile = {
 const STORAGE_KEY = "adaptiveStudyCoachProfile";
 const PROFILE_UPDATED_EVENT = "study-profile-updated";
 const DEFAULT_GRADE_LEVEL = "Engineering-track +2 (MPC/CS)";
-const DEFAULT_LEARNING_MODE: UserProfile["learningMode"] = "exam";
+const DEFAULT_LEARNING_MODE: UserProfile["learningMode"] = "learn";
 const DEFAULT_SKILL_LEVEL: UserProfile["skillLevel"] = "Intermediate";
 
 const createGuestProfile = (): UserProfile => ({
@@ -57,13 +57,21 @@ export const loadUserProfile = (): UserProfile => {
       ...createGuestProfile(),
       ...parsed,
     };
-    const normalized = {
-      ...merged,
-      gradeLevel: normalizeGradeLevel(merged.gradeLevel),
-      learningMode: normalizeLearningMode(merged.learningMode),
-      skillLevel: normalizeSkillLevel(merged.skillLevel),
-      autoStartSubject: merged.autoStartSubject ?? false,
-    };
+  const normalized = {
+    ...merged,
+    gradeLevel: normalizeGradeLevel(merged.gradeLevel),
+    learningMode: normalizeLearningMode(merged.learningMode),
+    skillLevel: normalizeSkillLevel(merged.skillLevel),
+    autoStartSubject: merged.autoStartSubject ?? false,
+  };
+  if (
+    normalized.learningMode === "exam" &&
+    merged.examDaysLeft === undefined &&
+    merged.paceSessionsPerWeek === undefined &&
+    merged.focusSubject === undefined
+  ) {
+    normalized.learningMode = DEFAULT_LEARNING_MODE;
+  }
     if (normalized.gradeLevel !== merged.gradeLevel) {
       window.localStorage.setItem(STORAGE_KEY, JSON.stringify(normalized));
     }
